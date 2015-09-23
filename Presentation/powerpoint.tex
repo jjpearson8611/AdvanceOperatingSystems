@@ -14,59 +14,38 @@
 \usetheme{Warsaw}
 
 \begin{document}
-\title{RSA Public and Private Key Generation}   
-\author{Jason Pearson and Sam Demorest} 
+\title{Public key cryptology, RSA, ElGamal, elliptic curve}   
+\author{Jason Pearson and } 
 \date{\today} 
 
 \frame{\titlepage} 
 
-%\frame{
-%	\frametitle{Overview}\tableofcontents
-%}  
-
-\frame{\frametitle{Design Decisions}
-	Used the in beta programming language Rust\newline
-	Two separate programs reuse-ability\newline
-	Public and private key generation\newline
-	Encryption and decryption of characters\newline	
+\frame{\frametitle{Types of Encryption}
+	Asymmetric Encryption \newline
+	Symmetric Encryption \newline
+	Hashing \newline
 }
 
 \frame{\frametitle{Implimentation}
-	Miller-Rabin instead of AKS for speed\newline
-	Modular exponentiation\newline
-	ASCII representation of character for encrypting\newline
-	Used an inverse function instead of Extended Euclidean Elgorithm\newline
+	
 }
 
-\frame{\frametitle{Output}
+\frame{\frametitle{ElGamal}
+	
 }
 
 \frame{\frametitle{Conclusion}
-	Able to determine large prime numbers\newline
-	Able to encrypt one character and decrypt it\newline \newline
-	BigInt library not fully ready for deployment yet \newline
-	No use of bit twiddling operations for optimization \newline
+	
 }
 
 \frame{\frametitle{Demo!}
-	Demo Time!\newline
+	
 }
 
 
 \frame{\frametitle{References}
 	
-	AKS References:\newline
-	http://www.cse.iitk.ac.in/users/manindra/algebra/primality\_v6.pdf\newline
-	http://mathworld.wolfram.com/AKSPrimalityTest.html\newline
 	
-	Rust References:\newline
-	https://doc.rust-lang.org/\newline
-	http://rustbyexample.com/\newline
-	https://github.com/rust-lang/rust\newline
-	
-	RSA Cryptosystem References:\newline
-	http://mathworld.wolfram.com/RSAEncryption.html\newline
-	https://engineering.purdue.edu/kak/compsec/NewLectures/Lecture12.pdf\newline
 	
 }
 \end{document}
