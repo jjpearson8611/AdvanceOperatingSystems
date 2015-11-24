@@ -26,6 +26,8 @@
 \frame{\frametitle{Key Terms}
 	Plain text: typically a simple text such as this line \newline
 	Cipher text: a message after it has been encrypted \newline
+	Prime Number: a whole number that can only be divided evenly by one and itself also it is greater than one \newline
+	
 }
 \frame{\frametitle{Types of Encryption}
 	Symmetric Encryption \newline
@@ -138,8 +140,58 @@
 	
 }
 
+\frame{\frametitle{Padding Schemes}
+	
+}
 
 \frame{\frametitle{RSA Cryptosystem}
+	First designed in 1973 and declassified in 1997. \newline
+	Named after its founders Ron Rivest, Adi Shamir and Leonar Adleman \newline
+	Uses large prime numbers to create a private and public key \newline
+	Security arises from the presumed difficulty of factoring large prime numbers \newline
+}
+
+\frame{\frametitle{Background Mathmatics}
+	NOT SURE IF I WANNA SPEND TIME ON BACKGROUND MATH WILL DETERMINE AFTER SOME DRY RUNS \newline
+	The Set Of Integers Modulo P		\newline
+	Integer Remainder After Dividing\newline
+	Multiplicative Inverse And The Greatest Common Divisor\newline
+	Prime Numbers\newline
+	Euler's Totient	\newline
+}
+
+\frame{\frametitle{RSA Generating Public and Private Keys}
+	Generate Two Large Prime Numbers\newline
+	Compute n \newline
+	Compute Euler's Totient Function \newline
+	Create Public Key \newline
+	Create Private Key \newline
+}
+
+
+\frame{\frametitle{Generating Large Prime Numbers}
+	Generate two large prime numbers. \newline
+	Typically uses AKS testing for prime numbers \newline
+	These two values we will call p and q \newline
+	p = 991 \newline
+	q = 821 \newline
+}
+
+\frame{\frametitle{Computing n and Euler's Totient}
+	We calculate n = p * q \newline
+	We then can determine Euler's totient value by using the following equation. \newline
+	$\phi \left(n\right)=\phi \left(p\right)\phi \left(q\right)=\left(p-1\right)\left(q-1\right)=n-\left(p+q-1\right)$ \newline
+	So we have n = 991 * 821 = 813611 \newline
+	And for $\phi \left( n \right) = 81180$ \newline
+}
+
+\frame{\frametitle{Create Public and Private Keys}
+	To create a public key we pick an arbitrary number e between $1 < e < \phi \left(n\right)$ for example we will use e = 7423 \newline
+	To create a private key we need to find the modular multiplicative inverse of e. \newline 
+	This is commonly done using the Extended Euclidean Algorithm. \newline
+	
+	$d\equiv {e}^{-1}\left(\mathrm{mod}\left(\phi \left(n\right)\right)\right)$ \newline
+	This makes our value of d = 788287 
 	
 }
 
@@ -152,10 +204,6 @@
 }
 
 \frame{\frametitle{Conclusion}
-	
-}
-
-\frame{\frametitle{Demo!}
 	
 }
 
