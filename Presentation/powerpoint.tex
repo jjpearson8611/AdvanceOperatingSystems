@@ -105,7 +105,7 @@
 
 
 \frame{\frametitle{Hashing}
-	
+	We may or may not want to talk about this?
 	
 }
 
@@ -135,11 +135,6 @@
 		\end{tikzpicture}
 }
 
-\frame{\frametitle{Cyclic Groups}
-	
-	
-}
-
 \frame{\frametitle{Padding Schemes}
 	
 }
@@ -151,38 +146,47 @@
 	Security arises from the presumed difficulty of factoring large prime numbers \newline
 }
 
-\frame{\frametitle{Background Mathmatics}
-	NOT SURE IF I WANNA SPEND TIME ON BACKGROUND MATH WILL DETERMINE AFTER SOME DRY RUNS \newline
-	The Set Of Integers Modulo P		\newline
-	Integer Remainder After Dividing\newline
-	Multiplicative Inverse And The Greatest Common Divisor\newline
-	Prime Numbers\newline
-	Euler's Totient	\newline
-}
-
 \frame{\frametitle{RSA Generating Public and Private Keys}
-	Generate Two Large Prime Numbers\newline
-	Compute n \newline
+	Generate two large prime numbers and use to calculate n\newline
 	Compute Euler's Totient Function \newline
-	Create Public Key \newline
-	Create Private Key \newline
+	Create Public Key and Private Key \newline
 }
 
 
 \frame{\frametitle{Generating Large Prime Numbers}
 	Generate two large prime numbers. \newline
-	Typically uses AKS testing for prime numbers \newline
+	Typically uses AKS testing and/or the Miller-Rabin test for prime numbers \newline
 	These two values we will call p and q \newline
 	p = 991 \newline
 	q = 821 \newline
+	We next calculate n = p * q \newline
+	So we have n = 991 * 821 = 813611 \newline
+	
+	\begin{center}
+		\begin{tabular}{| c | c |}
+			\hline
+			Public Information & Secret Information\\ \hline
+			n = 813611 & q = 821  \\ \hline
+			 & p = 991 \\ \hline
+		\end{tabular}
+	\end{center}
 }
 
-\frame{\frametitle{Computing n and Euler's Totient}
-	We calculate n = p * q \newline
+\frame{\frametitle{Euler's Totient}
 	We then can determine Euler's totient value by using the following equation. \newline
 	$\phi \left(n\right)=\phi \left(p\right)\phi \left(q\right)=\left(p-1\right)\left(q-1\right)=n-\left(p+q-1\right)$ \newline
-	So we have n = 991 * 821 = 813611 \newline
-	And for $\phi \left( n \right) = 81180$ \newline
+	And for $\phi \left( n \right) = \phi \left( 813611 \right) = 811800$ \newline
+	
+		\begin{center}
+			\begin{tabular}{| c | c |}
+				\hline
+				Public Information & Secret Information\\ \hline
+				n = 813611 & q = 821  \\ \hline
+				 & p = 991 \\ \hline
+				 & $\phi \left(n\right)$  = 811800\\ \hline
+			\end{tabular}
+		\end{center}
+	
 }
 
 \frame{\frametitle{Create Public and Private Keys}
@@ -192,6 +196,42 @@
 	
 	$d\equiv {e}^{-1}\left(\mathrm{mod}\left(\phi \left(n\right)\right)\right)$ \newline
 	This makes our value of d = 788287 
+	\begin{center}
+		\begin{tabular}{| c | c |}
+			\hline
+			Public Information & Secret Information\\ \hline
+			n = 813611 & q = 821  \\ \hline
+			e = 7423  & p = 991 \\ \hline
+			 & $\phi \left(n\right)$  = 811800\\ \hline
+			  & d = 788287 \\ \hline
+		\end{tabular}
+	\end{center}
+	
+}
+
+\frame{\frametitle{Working Example}
+	Using these values we can create a cipher text c and decrypt it using the following equations \newline
+	$c\equiv {m}^{e}\left(mod\left(n\right)\right)$ and
+	$m\equiv {c}^{d}\left(mod\left(n\right)\right)$ \newline
+	Finishing up our example we will encrypt "Hi" using our new values \newline
+	plain text m = 72105, e = 7423, d = 788287, n = 813611\newline
+		\begin{center}
+			\begin{tabular}{| c | c |}
+				\hline
+			Public Encrypt & Private Encrypt \\ \hline
+			$c\equiv {m}^{e}\left(mod\left(n\right)\right)$ & $c\equiv {m}^{d}\left(mod\left(n\right)\right)$ \\ \hline
+			$c \equiv {72105}^{7423} mod (813611)$ & $c \equiv {72105}^{788287} mod (813611)$ \\ \hline
+			$c = 707473$  & $c = 616895$ \\ \hline \hline
+			Private Decrypt & Public Decrypt \\ \hline
+			$m\equiv {c}^{d}\left(mod\left(n\right)\right)$ & $m\equiv {c}^{e}\left(mod\left(n\right)\right)$ \\ \hline
+			$m \equiv {707473}^{788287} mod (813611)$ & $m \equiv {616895}^{7423} mod (813611)$\\  \hline
+			$m = 72105$ & $m = 72105$\\ \hline
+			\end{tabular}
+		\end{center}
+}
+
+
+\frame{\frametitle{RSA Security Issues}
 	
 }
 
@@ -210,6 +250,8 @@
 
 \frame{\frametitle{References}
 	http://caislab.kaist.ac.kr/lecture/2010/spring/cs548/basic/B02.pdf
+	http://doctrina.org/Why-RSA-Works-Three-Fundamental-Questions-Answered.html
+	http://doctrina.org/How-RSA-Works-With-Examples.html
 	
 	
 }
