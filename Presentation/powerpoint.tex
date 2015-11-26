@@ -235,6 +235,63 @@
 	
 }
 
+
+\frame{\frametitle{ElGamal Cryptosystem}
+	This method for cryptogphy uses discrete logarithms with a large prime modulus \newline
+	The first step in creating is to create a large prime number \newline
+	Then we create a Public and Private key \newline
+	These can be used to encrypt and decrypt information \newline
+}
+
+\frame{\frametitle{Generating Large Prime Numbers}
+	First we generate a large prime number p\newline
+	For us p = 17 \newline
+	We then create a generator g of multiplicative group $ \mathbb{Z}_{p}^{*}$ of integers modulo p \newline
+	For this example g = 6 \newline
+	\begin{center}
+		\begin{tabular}{| c | c |}
+			\hline
+			Public Information & Private Information \\ \hline
+			p = 17 & \\ \hline
+			g = 6 & \\ \hline
+		\end{tabular}
+	\end{center}
+}
+
+
+\frame{\frametitle{ElGamal Creating Public and Private Keys}
+	We then select a private key a where $1\le a\le p-2$ \newline
+	For this example a = 5 \newline
+	We can then use this to generate the last part of the public key \newline ${g}^{a}\mathrm{mod}p = {6}^{5}\mathrm{mod}17 = 7$
+		\begin{center}
+			\begin{tabular}{| c | c |}
+				\hline
+				Public Information & Private Information \\ \hline
+				p = 17 & a = 5\\ \hline
+				g = 6 & \\ \hline
+				${g}^{a}\mathrm{mod}p$ = 7 & \\ \hline
+			\end{tabular}
+		\end{center}
+}
+
+\frame{\frametitle{Encrypting and Decrypting a Message}
+	We will have our message m = 13 \newline
+	A public sender to send a message to the private key holder picks a random value k for this example k = 10\newline
+	We then compute $y={g}^{k}\mathrm{mod}p={6}^{10}\mathrm{mod}17=15$ \newline
+	
+	
+	
+	\begin{center}
+		\begin{tabular}{| c | c |}
+			\hline
+			Public Information & Private Information \\ \hline
+			p = 17 & a = 5\\ \hline
+			g = 6 & \\ \hline
+			${g}^{a}\mathrm{mod}p$ = 7 & \\ \hline
+		\end{tabular}
+	\end{center}
+}
+
 \frame{\frametitle{ElGamal Cryptosystem}
 	
 }
