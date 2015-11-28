@@ -231,7 +231,7 @@
 }
 
 
-\frame{\frametitle{RSA Security Issues}
+\frame{\frametitle{RSA Practical Usage}
 	
 }
 
@@ -274,13 +274,12 @@
 		\end{center}
 }
 
-\frame{\frametitle{Encrypting and Decrypting a Message}
+\frame{\frametitle{Encrypting a Message}
 	We will have our message m = 13 \newline
 	A public sender to send a message to the private key holder picks a random value k for this example k = 10\newline
-	We then compute $y={g}^{k}\mathrm{mod}p={6}^{10}\mathrm{mod}17=15$ \newline
-	
-	
-	
+	We then compute $c_{1}={g}^{k} mod p = 15$ \newline
+	Now $c_{2}= m * {g}^{k}\mathrm{mod}p= 13 * {6}^{10}  mod 17 = 8$ \newline
+	Cipher text sent through $c_{1}$ and $c_{2}$ to private key holder \newline
 	\begin{center}
 		\begin{tabular}{| c | c |}
 			\hline
@@ -292,7 +291,28 @@
 	\end{center}
 }
 
-\frame{\frametitle{ElGamal Cryptosystem}
+\frame{\frametitle{Decrypting a Message}
+	 First we must calculate the shared secret \newline
+	 $s = \left({c_{1}}^{a}\right)\ast c_{2}\mathrm{mod}p = \left({15}^{5}\right)\ast 8\mathrm{mod}17 = 16$ \newline
+	 We then take the modular inverse of s and multiply it by $c_{2}$\newline
+	 Finding the modular inverse is commonly done with the Extended Euclidean Algorithm \newline
+	 $m = \left({c}_{{2}^{\ast }}{s}^{-1}\right)\mathrm{mod}p=\left(8\ast 8\right)\mathrm{mod}17 = 64 \mathrm{mod} 17 = 13$
+	 
+	 
+	\begin{center}
+		\begin{tabular}{| c | c |}
+			\hline
+			Public Information & Private Information \\ \hline
+			p = 17 & a = 5\\ \hline
+			g = 6 & \\ \hline
+			${g}^{a}\mathrm{mod}p$ = 7 & \\ \hline
+		\end{tabular}
+	\end{center}
+}
+
+\frame{\frametitle{ElGamal Practical Usage}
+	Cipher text double the size in bits than the message \newline
+	Commonly used in hybrid Cryptosystems \newline
 	
 }
 
