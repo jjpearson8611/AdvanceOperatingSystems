@@ -378,7 +378,7 @@
 
 \frame{\frametitle{Why Are They Used?}
 	Encryption keys are shorter and use fewer memory and CPU resources \newline
-	Operations on points are quickly calculated and are one-way \newline
+	Operations on points are quickly calculated and are difficult to reverse \newline
 }
 
 \frame{\frametitle{Group Operations: Addition}
@@ -431,6 +431,70 @@
 	\begin{center}
 		$y_R = s(x_P - x_R) - y_P$
 	\end{center}
+}
+
+\frame{\frametitle{What If Points Are Vertical?}
+	For point addition
+	\begin{center}
+		$P + Q = \mathcal{O}$ if $x_P = x_Q$
+	\end{center}
+	or for point doubling
+	\begin{center}
+		$P + P = \mathcal{O}$ if $y_P = 0$
+	\end{center}
+}
+
+\frame{\frametitle{Group Operation: Scalar Multiplication}
+	If a point $Q$ is defined as
+	\begin{center}
+		$Q = kP$ where $k \in \mathbb{Z}$
+	\end{center}
+	then it is calculated through repeated addition
+	\begin{center}
+		$Q = P + P + \textellipsis + P$
+	\end{center}
+	\begin{center}
+		$K$ times
+	\end{center}
+}
+
+\frame{\frametitle{Elliptic Curve Discrete Logarithm Problem}
+	Scalar Multiplication is effectively a one-way function \newline
+	Given
+	\begin{center}
+		$Q, P \in E(\mathbb{Z}/p\mathbb{Z})$
+	\end{center}
+	finding
+	\begin{center}
+		$k$ such that $Q = kP$
+	\end{center}
+	is infeasible!
+}
+
+\frame{\frametitle{Base Point or Generator}
+	Some point
+	\begin{center}
+		$G \in E(\mathbb{Z}/p\mathbb{Z})$
+	\end{center}
+	that generates a cyclic group where
+	\begin{center}
+		ord($G$) $= n$ and $kG = \mathcal{O}$
+	\end{center}
+	The cofactor is defined as
+	\begin{center}
+		$h = \dfrac{|E(\mathbb{Z}/p\mathbb{Z})|}{n}$
+	\end{center}
+	and ideally $h = 1$ \newline
+	Cofactors over 4 are more susceptible to attacks
+}
+
+\frame{\frametitle{Domain Parameters}
+	Public parameters ${p, a, b, G, n, h}$: \newline
+	$p$: finite field \newline
+	$a, b$: curve parameters \newline
+	$G$: generator \newline
+	$n$: ord(G) \newline
+	$h$: cofactor
 }
 
 \end{document}
