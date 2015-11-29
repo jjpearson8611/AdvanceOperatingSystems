@@ -2,14 +2,15 @@
 % It's a part of presentation made by myself.
 % It may not used commercial.
 % The noncommercial use such as private and study is free
-% Sep. 2005 
-% Author: Sascha Frank 
-% University Freiburg 
+% Sep. 2005
+% Author: Sascha Frank
+% University Freiburg
 % www.informatik.uni-freiburg.de/~frank/
 
 \documentclass{beamer}
 \usepackage{multicol}
 \usepackage{amsmath}
+\usepackage{amssymb}
 
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric, arrows, positioning}
@@ -17,18 +18,18 @@
 \usetheme{Warsaw}
 
 \begin{document}
-\title{Public key cryptology, RSA, ElGamal, Elliptic Curve}   
-\author{Jason Pearson and } 
-\date{\today} 
+\title{Public key cryptology, RSA, ElGamal, Elliptic Curve}
+\author{Jason Pearson and Colin MacCreery}
+\date{\today}
 
-\frame{\titlepage} 
+\frame{\titlepage}
 
 \frame{\frametitle{Key Terms}
 	Plain text: typically a simple text such as this line \newline
 	Cipher text: a message after it has been encrypted \newline\newline
 	One-way Function: A function that is easy to compute on every input but hard to invert given the output \newline\newline
 	Trap Door One-way Function: A function that is easy to compute but hard to invert given the output unless you know the special information of the trap door \newline \newline
-	
+
 }
 \frame{\frametitle{Types of Encryption}
 	Symmetric Encryption \newline
@@ -48,7 +49,7 @@
 	\node[draw, fill=red] (cipherTwo) at (4,2) {Ciphertext};
 	\node[draw, fill=gray] (decrypt) at (4,1) {Decrypt};
 	\node[draw, fill=green] (plainTwo) at (4,0) {Plain Text};
-	
+
 	\draw[->,draw=black] (plainOne) to (encrypt);
 	\draw[->,draw=black] (encrypt) to (cipherOne);
 	\draw[->,draw=black] (key) to (encrypt);
@@ -56,7 +57,7 @@
 	\draw[->,draw=black] (cipherTwo) to (decrypt);
 	\draw[->,draw=black] (decrypt) to (plainTwo);
 	\end{tikzpicture}
-	
+
 }
 \frame{\frametitle{Asymmmetric Encryption}
 	Public key and private key pair \newline
@@ -69,9 +70,9 @@
 		\node[draw, fill=red, below = of encryptpriv] (cipherOne) {Ciphertext};
 		\node[draw, fill=yellow, right = of encryptpriv] (keypriv) {Private Key};
 		\node[draw, fill=gray, below = of cipherOne] (decryptpub)  {Decrypt};
-		\node[draw, fill=green, below = of decryptpub] (plainTwo) {Plain Text};		
+		\node[draw, fill=green, below = of decryptpub] (plainTwo) {Plain Text};
 		\node[draw, fill=yellow, right = of decryptpub] (keypub)  {Public Key};
-	
+
 		\node[draw, fill=yellow, right = of keypriv] (keypubtwo) {Public Key};
 		\node[draw, fill=yellow, right = of keypub] (keyprivtwo) {Private Key};
 		\node[draw, fill=gray, right = of keypubtwo] (encryptpub) {Encrypt};
@@ -79,25 +80,25 @@
 		\node[draw, fill=green, below = of decryptpriv] (plainFour) {Plain Text};
 		\node[draw, fill=green, above = of encryptpub] (plainThree) {Plain Text};
 		\node[draw, fill=red, below = of encryptpub] (cipherThree) {CipherText};
-		
-		
+
+
 		\draw[->,draw=black] (plainOne) to (encryptpriv);
 		\draw[->,draw=black] (encryptpriv) to (cipherOne);
 		\draw[->,draw=black] (keypriv) to (encryptpriv);
 		\draw[->,draw=black] (cipherOne) to (decryptpub);
 		\draw[->,draw=black] (keypub) to (decryptpub);
 		\draw[->,draw=black] (decryptpub) to (plainTwo);
-		
+
 		\draw[->,draw=black] (plainThree) to (encryptpub);
 		\draw[->,draw=black] (encryptpub) to (cipherThree);
 		\draw[->,draw=black] (keypubtwo) to (encryptpub);
 		\draw[->,draw=black] (cipherThree) to (decryptpriv);
 		\draw[->,draw=black] (keyprivtwo) to (decryptpriv);
 		\draw[->,draw=black] (decryptpriv) to (plainFour);
-		
+
 		\draw[<->, draw=black] (keypub) to (keypubtwo);
 		\draw[<->, draw=black] (keypriv) to (keyprivtwo);
-		
+
 	\end{tikzpicture}
 }
 
@@ -112,8 +113,8 @@
 		\node[draw, fill=green, left = of symkey] (plaintext) {Plain Text};
 		\node[draw, fill=gray, right = of symkey, text width = 2.5cm] (encryptpub) {Encrypt with Public Key};
 		\node[draw, fill=red, right = of encryptpub, text width = 3cm] (asymencrypt) {Encrypted Key, Hash and Message};
-		
-		
+
+
 		\draw[->,draw=black] (plaintext) to (encrypt);
 		\draw[->,draw=black] (plaintext) to (hash);
 		\draw[->,draw=black] (hash) to (encryptpub);
@@ -121,7 +122,7 @@
 		\draw[->,draw=black] (symkey) to (encryptpub);
 		\draw[->,draw=black] (encrypt) to (asymencrypt);
 		\draw[->,draw=black] (encryptpub) to (asymencrypt);
-		
+
 		\end{tikzpicture}
 }
 
@@ -147,7 +148,7 @@
 	q = 821 \newline
 	We next calculate n = p * q \newline
 	So we have n = 991 * 821 = 813611 \newline
-	
+
 	\begin{center}
 		\begin{tabular}{| c | c |}
 			\hline
@@ -164,7 +165,7 @@
 	We then can determine Euler's totient value by using the following equation. \newline
 	$\phi \left(n\right)=\phi \left(p\right)\phi \left(q\right)=\left(p-1\right)\left(q-1\right)$ \newline
 	And for $\phi \left( n \right) = \phi \left( 813611 \right) = 811800$ \newline
-	
+
 		\begin{center}
 			\begin{tabular}{| c | c |}
 				\hline
@@ -174,20 +175,20 @@
 				 & $\phi \left(n\right)$  = 811800\\ \hline
 			\end{tabular}
 		\end{center}
-	
+
 }
 
 \frame{\frametitle{Create Public and Private Keys}
 	To create a public key we pick an arbitrary number e between $1 < e < \phi \left(n\right)$ for example we will use e = 7423 \newline
-	To create a private key we need to find the modular multiplicative inverse of e. \newline 
+	To create a private key we need to find the modular multiplicative inverse of e. \newline
 	$d\equiv {e}^{-1}\left(\mathrm{mod}\left(\phi \left(n\right)\right)\right)$ or \newline
 	$d * 7423\equiv 1\left(\mathrm{mod}\left(\phi \left(n\right)\right)\right)$ \newline
 	$788287 * 7423\equiv 1\left(\mathrm{mod}\left(\phi \left(n\right)\right)\right)$\newline
 	$5851454401\equiv 1\left(\mathrm{mod}\left(\phi \left(n\right)\right)\right)$\newline
 	$1\equiv 1\left(\mathrm{mod}\left(\phi \left(n\right)\right)\right)$
-	
+
 	This is commonly done using the Extended Euclidean Algorithm. \newline
-	This makes our value of d = 788287 
+	This makes our value of d = 788287
 	\begin{center}
 		\begin{tabular}{| c | c |}
 			\hline
@@ -198,7 +199,7 @@
 			  & d = 788287 \\ \hline
 		\end{tabular}
 	\end{center}
-	
+
 }
 
 \frame{\frametitle{Working Example}
@@ -234,7 +235,7 @@
 
 \frame{\frametitle{Diffie-Hellman Key Exchange}
 	This key exchange allows for secret communication over a public network. \newline
-	
+
 	\begin{tikzpicture}[node distance=.3cm]
 	\node[draw, fill=yellow] (aliceCommon) {Alice Common Paint};
 	\node[draw, fill=yellow, right = of aliceCommon] (bobCommon) {Bob Common Paint};
@@ -248,15 +249,15 @@
 	\node[draw, fill=blue, below = of aliceRecv] (bobPrivate2) {Bob Private Paint};
 	\node[draw, fill=brown, below = of alicePrivate2] (aliceShared) {Alice Shared Paint};
 	\node[draw, fill=brown, below = of bobPrivate2] (bobShared) {Bob Shared Paint};
-	
-	
+
+
 	\draw[->,draw=black] (aliceCommon) to (alicePrivate);
 	\draw[->,draw=black] (alicePrivate) to (aliceMixed);
 	\draw[->,draw=black] (aliceMixed) to (aliceRecv);
 	\draw[->,draw=black] (aliceRecv) to (bobPrivate2);
 	\draw[->,draw=black] (alicePrivate2) to (aliceShared);
-	
-	
+
+
 	\draw[->,draw=black] (bobCommon) to (bobPrivate);
 	\draw[->,draw=black] (bobPrivate) to (bobMixed);
 	\draw[->,draw=black] (bobMixed) to (bobRecv);
@@ -329,8 +330,8 @@
 	 We then take the modular inverse of s and multiply it by $c_{2}$\newline
 	 Finding the modular inverse is commonly done with the Extended Euclidean Algorithm \newline
 	 $m = \left({c}_{{2}^{\ast }}{s}^{-1}\right)\mathrm{mod}p=\left(8\ast 8\right)\mathrm{mod}17 = 64 \mathrm{mod} 17 = 13$
-	 
-	 
+
+
 	\begin{center}
 		\begin{tabular}{| c | c |}
 			\hline
@@ -346,6 +347,41 @@
 	Cipher text double the size in bits than the message \newline
 	Commonly used in hybrid Cryptosystems \newline
 	El Gamal is probablistic meaning that the same message encrypted won't always give the same ciphertext \newline
-	
+
 }
+
+\frame{\frametitle{Elliptic Curve Cryptography}
+	Elliptic Curves are a set of points defined by
+	\begin{center}
+		$E = \{(x, y) | y^2 = x^3 + ax + b\}$
+	\end{center}
+	where
+	\begin{center}
+		$a, b \in K$
+	\end{center}
+	point at infinity: $\mathcal{O}$ \newline
+	Also the following inequality must be true
+	\begin{center}
+		$4a^3 + 27b^2 \neq 0$
+	\end{center}
+}
+
+\frame{\frametitle{What Fields Can Be Used?}
+	The field $K$ can be defined as
+	\begin{center}
+		$\mathbb{R}, \mathbb{Q}, \mathbb{C}, \mathbb{Z}/p\mathbb{Z}$
+	\end{center}
+}
+
+\frame{\frametitle{What Do Elliptic Curves Look Like?}
+	\begin{center}
+		\includegraphics[scale=0.4]{curves}
+	\end{center}
+}
+
+\frame{\frametitle{Why Are They Used?}
+	Encryption keys are shorter and use fewer memory and CPU resources \newline
+
+}
+
 \end{document}
