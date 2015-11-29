@@ -25,20 +25,20 @@
 
 \frame{\frametitle{Key Terms}
 	Plain text: typically a simple text such as this line \newline
-	Cipher text: a message after it has been encrypted \newline
-	Prime Number: a whole number that can only be divided evenly by one and itself also it is greater than one \newline
+	Cipher text: a message after it has been encrypted \newline\newline
+	One-way Function: A function that is easy to compute on every input but hard to invert given the output \newline\newline
+	Trap Door One-way Function: A function that is easy to compute but hard to invert given the output unless you know the special information of the trap door \newline \newline
 	
 }
 \frame{\frametitle{Types of Encryption}
 	Symmetric Encryption \newline
 	Asymmetric Encryption \newline
-	Hashing \newline
 	Hybrid Encryption \newline
 }
 
 \frame{\frametitle{Symmetric Encryption}
 	Encryption and Decryption use the same key\newline
-	
+	Symmetric systems include the Advanced Encryption Standard (AES), Blowfish and Serpent \newline
 	\center
 	\begin{tikzpicture}[node distance=2cm]
 	\node[draw, fill=green] (plainOne) at (0,2) {Plain Text};
@@ -60,10 +60,8 @@
 }
 \frame{\frametitle{Asymmmetric Encryption}
 	Public key and private key pair \newline
-	Public key is used to encrypt a message\newline
-	Private key is used to decrypt a message\newline
 	Creating the key tends to be computationally expensive\newline
-	
+	Examples of asymmetric systems are ElGamal, RSA, DSS and Diffie-Hellman key exchange protocol \newline
 	\center
 	\begin{tikzpicture}[node distance=.25cm]
 		\node[draw, fill=green] (plainOne) {Plain Text};
@@ -103,18 +101,10 @@
 	\end{tikzpicture}
 }
 
-
-\frame{\frametitle{Hashing}
-	We may or may not want to talk about this?
-	
-}
-
-
-
 \frame{\frametitle{Hybrid Encryption}
 	Uses ideas from symmetric and asymmetric encryption methods \newline
 	An asymmetric cryptosystem is used for key encapsulation and an symmetric system is used for data encapsulation\newline
-	
+	An example of a hybrid system is OpenPGP \newline
 		\begin{tikzpicture}[node distance=.3cm]
 		\node[draw, fill=gray] (encrypt) {Encrypt};
 		\node[draw, fill=yellow, below = of encrypt] (symkey) {Symmetric Key};
@@ -135,13 +125,11 @@
 		\end{tikzpicture}
 }
 
-\frame{\frametitle{Padding Schemes}
-	
-}
+
 
 \frame{\frametitle{RSA Cryptosystem}
 	First designed in 1973 and declassified in 1997. \newline
-	Named after its founders Ron Rivest, Adi Shamir and Leonar Adleman \newline
+	Named after its rediscoverers Ron Rivest, Adi Shamir and Leonar Adleman \newline
 	Uses large prime numbers to create a private and public key \newline
 	Security arises from the presumed difficulty of factoring large prime numbers \newline
 }
@@ -173,8 +161,10 @@
 }
 
 \frame{\frametitle{Euler's Totient}
+	Every number has a unique prime factorization \newline
+	The $\phi$ value of a number is the count of numbers less than it that aren't factors of the original number \newline
 	We then can determine Euler's totient value by using the following equation. \newline
-	$\phi \left(n\right)=\phi \left(p\right)\phi \left(q\right)=\left(p-1\right)\left(q-1\right)=n-\left(p+q-1\right)$ \newline
+	$\phi \left(n\right)=\phi \left(p\right)\phi \left(q\right)=\left(p-1\right)\left(q-1\right)$ \newline
 	And for $\phi \left( n \right) = \phi \left( 813611 \right) = 811800$ \newline
 	
 		\begin{center}
@@ -231,15 +221,52 @@
 }
 
 
-\frame{\frametitle{RSA Practical Usage}
-	
+\frame{\frametitle{RSA Practical Considerations}
+	Used in many secure applications escpecially on the internet\newline
+	Keys need to be very large and continue to lengthen as computers become more powerful \newline
+	A quantum computer can factor in polynomial time breaking RSA \newline
+
 }
 
 
+
+\frame{\frametitle{Diffie-Hellman Key Exchange}
+	This key exchange allows for secret communication over a public network. \newline
+	
+	\begin{tikzpicture}[node distance=.3cm]
+	\node[draw, fill=yellow] (aliceCommon) {Alice Common Paint};
+	\node[draw, fill=yellow, right = of aliceCommon] (bobCommon) {Bob Common Paint};
+	\node[draw, fill=red, below = of aliceCommon] (alicePrivate) {Alice Private Paint};
+	\node[draw, fill=blue, below = of bobCommon] (bobPrivate) {Bob Private Paint};
+	\node[draw, fill=orange, below = of alicePrivate] (aliceMixed) {Alice Mixed Paint};
+	\node[draw, fill=green, below = of bobPrivate] (bobMixed) {Bob Mixed Paint};
+	\node[draw, fill=orange, below = of bobMixed] (aliceRecv) {Alice Mixed Paint};
+	\node[draw, fill=green, below = of aliceMixed] (bobRecv) {Bob Mixed Paint};
+	\node[draw, fill=red, below = of bobRecv] (alicePrivate2) {Alice Private Paint};
+	\node[draw, fill=blue, below = of aliceRecv] (bobPrivate2) {Bob Private Paint};
+	\node[draw, fill=brown, below = of alicePrivate2] (aliceShared) {Alice Shared Paint};
+	\node[draw, fill=brown, below = of bobPrivate2] (bobShared) {Bob Shared Paint};
+	
+	
+	\draw[->,draw=black] (aliceCommon) to (alicePrivate);
+	\draw[->,draw=black] (alicePrivate) to (aliceMixed);
+	\draw[->,draw=black] (aliceMixed) to (bobRecv);
+	\draw[->,draw=black] (aliceRecv) to (alicePrivate2);
+	\draw[->,draw=black] (alicePrivate2) to (aliceShared);
+	
+	
+	\draw[->,draw=black] (bobCommon) to (bobPrivate);
+	\draw[->,draw=black] (bobPrivate) to (bobMixed);
+	\draw[->,draw=black] (bobMixed) to (aliceRecv);
+	\draw[->,draw=black] (bobRecv) to (bobPrivate2);
+	\draw[->,draw=black] (bobPrivate2) to (bobShared);
+	\end{tikzpicture}
+}
+
 \frame{\frametitle{ElGamal Cryptosystem}
 	This method for cryptogphy uses discrete logarithms with a large prime modulus \newline
-	The first step in creating is to create a large prime number \newline
-	Then we create a Public and Private key \newline
+	The first step in creating a prime modulous and a generator\newline
+	Next create a Public and Private key \newline
 	These can be used to encrypt and decrypt information \newline
 }
 
@@ -247,6 +274,7 @@
 	First we generate a large prime number p\newline
 	For us p = 17 \newline
 	We then create a generator g of multiplicative group $ \mathbb{Z}_{p}^{*}$ of integers modulo p \newline
+	A generator when raised to a power x is evenly distributed over $ \mathbb{Z}_{p}^{*}$ \newline
 	For this example g = 6 \newline
 	\begin{center}
 		\begin{tabular}{| c | c |}
@@ -313,23 +341,7 @@
 \frame{\frametitle{ElGamal Practical Usage}
 	Cipher text double the size in bits than the message \newline
 	Commonly used in hybrid Cryptosystems \newline
-	
-}
-
-\frame{\frametitle{Elliptic Curve}
-	
-}
-
-\frame{\frametitle{Conclusion}
-	
-}
-
-
-\frame{\frametitle{References}
-	http://caislab.kaist.ac.kr/lecture/2010/spring/cs548/basic/B02.pdf
-	http://doctrina.org/Why-RSA-Works-Three-Fundamental-Questions-Answered.html
-	http://doctrina.org/How-RSA-Works-With-Examples.html
-	
+	El Gamal is probablistic meaning that the same message encrypted won't always give the same ciphertext \newline
 	
 }
 \end{document}
