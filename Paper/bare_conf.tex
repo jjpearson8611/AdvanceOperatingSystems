@@ -82,10 +82,8 @@ Email: jason.j.pearson@wmich.edu}}
 
 
 
-\section{Introduction} \color{red}
-Writing an introduction sentence is hard. 
+\section{Introduction}
 
-\color{black}
 \subsection{Types of Encryption}
 
 
@@ -94,46 +92,35 @@ Asymmetric encryption is also known as public key cryptography. These public key
 \subsubsection{Symmetric Encryption}
 Symmetric encryption uses a single key for encryption and decryption. The keys on both sides are not always identical but both can encrypt and decrypt a message. Typically a symmetric encryption uses one of two methods stream ciphers or block ciphers. Stream ciphers encrypt data as it comes typically a few bytes at a time. For block ciphers a number of bits is taken at a time and is encrypted. If the data is too small to fit into a block it is padded so that it can fit into a block. Some common algorithms that use symmetric encryption are AES and blowfish.
 
-\subsubsection{Hashing} \color{red}
-Do we want to talk about hashing? Hashing isn't exactly a method of encryption but uses encryption ideas to create secure fields. could be used for more filler maybe?
-\color{black}
 \subsubsection{Hybrid Cryptosystems}
 Hybrid cryptosystems use both asymmetric and symmetric encryption schemes. A hybrid system works by encrypting the message with a symmetric encryption key. This key is then encrypted using an asymmetric encryption technique. The symmetric key is then appended to the message. The benefit of using two encryption methods is that less time is needed for encrypting and decrypting the message due to using a symmetric technique plus since the symmetric key is encrypted using an asymmetric method we can still get the security of a public private key pair. A new symmetric key is generated each time to improve security further. 
 
-\color{red}
-\subsection{Dependant (Dependent?) Algorithms}
-There are many algorithms that different forms of cryptography rely on.
-This could be like an appendix type area maybe?
-I want to try and keep the algorithm talk less cluttered by talking about the parts they depend on first.
-then in the algorithm section we can focus on that we already explained what the underlying parts are here is the algorithm.
+
+\subsection{Dependent Algorithms}
 
 \subsubsection{AKS Primality Test}
-Do we need to go into detail of algorithms that our algorithm is Dependant on?
-Maybe we make this section to help fill space up and make us look smart?
+The AKS primality test is a deterministic algorithm for determining if a number is prime. This is the fastest way to deterministically determine if a number is prime because it runs in polynomial time. The speed of this algorithm is O(${ln}^{6 + E} p$) or can be sped up even more to O(${ln}^{4 + E} p$). This extra speed up will incur the problem of an infinitesimally small chance for the result to be ambiguous.
 
-\subsubsection{Rabin Miller Primality Test}
+\subsubsection{Rabin-Miller Primality Test}
+The Miller-Rabin primality test provides a probabilistic efficient algorithm for determining if a number is prime. The algorithm takes in a random odd number and determines if the number is prime by testing to see if the inputted number has any factors. This algorithm is very quick and runs in no more time than (1 + o(1)) lg(n) where lg is logarithm base 2. This method is probabilistic so it can't be guaranteed that the number is prime but more likely than not it is prime.
 
+\color{red}
 \subsubsection{Diffie–Hellman–Merkle key exchange}
+something here would be good
+\subsubsection{Padding Schemes}
+something about padding schemes would be good too
+\color{black}
 
-\subsubsection{Cyclic Groups}
-integer and modular addition --> related to eulers totient function
-what all of rsa is based on more or less
-define gcd and modular exponentiation
-\newline
-cyclic groups are also used by elgamal i have discovered
 
 \subsubsection{Euler's Totient Function}
-used in the rsa algorithm for something
+The $\phi \left( n \right)$ value counts the number of positive numbers relatively prime to n.
+For example $\phi(7)$ would be 6 because 1,2,3,4,5,6 are all relatively prime to 7.
+Prime numbers have a special property where the phi value of a prime number will always be the value of the prime number minus one.
 
-\subsubsection{Padding Schemes}
-I bet a lot of these will need padding schemes and we should probably have a talk about this
 
 
 \subsubsection{Extended Euclidean Algorithm}
-This is used in rsa for creating a decryption key
-Used in el gamal as well
-\color{black}
-
+This algorithm is an extension to the Euclidean Algorithm. The Extended Euclidean Algorithm is used typically for finding the coefficients of Bezouts identity. This algorithm can be adapted to find multiplicative modular inverses in a much faster way than the brute force method.
 
 \section{RSA Asymmetric Cryptography}
 
@@ -224,14 +211,12 @@ Let our plain text message m = "Hi". First we use an ASCII table to determine th
 
 The ASCII values for our message 'Hi' were 72 and 105 so that means it was successfully decrypted. 
 
-
-\color{red}
-\subsection{Security Concerns}
-
 \subsection{Discussion}
+The RSA method only works because of the presumed difficulty of factoring large numbers. When quantum computers begin to become legitimate Shor's algorithm will be able to factor large numbers in polynomial time. This advancement will break the RSA method of cryptology. \newline
+\indent Ignoring the realm of quantum computers several attempts have been made to break RSA. A specialized machine for finding prime factorization of large numbers was designed and able to break a RSA key. With enough hardware simpler keys can be cracked but to combat this larger RSA keys can be used. 
+\newline \indent
+Another potential issue is that the random number generator may not always be 100 percent random. If someone was able to guess the correct seed then the work for prime factorization would be much easier.
 
-
-\color{black}
 
 %% -------------------------------- Break point for next algorithm --------------------------------
 
@@ -264,19 +249,37 @@ A series of these order pairs are sent then to the receiver who can then decrypt
 
 \begin{figure}[H]
 	\begin{center}
-		$s={a}^{x}$ \newline
+		$s={a}^{x} * b mod\left(p\right)$ \newline
 		$m=b * {s}^{-1} mod\left(p\right)$ \newline
 	\end{center}
 \end{figure}
 
 
 \subsection{Example of Usage}
+For this example we are going to have p = 17. Our generator g = 6. Using these values we can then finish our public key and private key. For this example our private key x = 5. This value was chosen at random. With these values we can compute the last portion of our public key which comes out to y = 7. Our message will be simple this time with m = 13. First before the message can be encrypted by a public sender the sender must create a random k value. In this example k = 10. Now we can encrypt the message by using the following equation. \newline
 
-\color{red}
-\subsection{Security Concerns}
+\begin{figure}[h]
+	\begin{center}
+		$a= 15 ={6}^{10}mod\left(17\right)$ \newline
+		$b= 8  ={7}^{10}\left(13\right)mod\left(17\right)$ \newline
+	\end{center}
+\end{figure}
+
+Now we can decrypt a and b using the private key x. 
+
+\begin{figure}[H]
+	\begin{center}
+		$s = 16 = \left( {15}^{5} * 8 \right) mod\left(17\right)$ \newline
+		$m= 13 = \left(8 * {16}^{-1} \right) mod\left(17\right)$ \newline
+	\end{center}
+\end{figure}
+
+The original message was 13 and after encrypting and decrypting 13 has been returned.
 
 \subsection{Discussion}
-
+One big concern with ElGamal is that a message m is going to be twice the size when encrypted. It is also slower than a symmetric algorithm for the same level of encryption so these features of algorithms makes ElGamal perfect for hybrid systems. \newline \indent
+One advantage that ElGamal has is that it works with any cyclic group such that the computational Diffie-Hellman assumption holds for the group. This assumption makes it so the encrypting function is one way. If the decisional Diffie-Hellman assumption the ElGamal will achieve semantic security. If these assumptions hold then that cyclic group can be used with ElGamal encryption. So in the future if the discrete logarithm problem is made trivial a new cyclic group could be developed.
+\color{red}
 \section{Elliptic Curve Asymmetric Cryptography}
 
 \subsection{Private and Public Key Generation}
@@ -285,51 +288,32 @@ A series of these order pairs are sent then to the receiver who can then decrypt
 
 \subsection{Example of Usage}
 
-\subsection{Security Concerns}
 \subsection{Discussion}
 
 
-
-\section{Comparison}
-Here would be a good spot to compare and contrast all of them. this is the area that i think he wants us to focus on but I don't know
-
-
-\section{Conclusion}
-The conclusion goes here.
-
-
-\section*{Acknowledgment}
-
-I don't plan on having acknowledgments but since it is in the template i will leave it here for now
-
-
-
-
-% %\begin{thebibliography}{1}
-
+\color{black}
 \section{References}
 \subsection{General References}
-http://mathworld.wolfram.com/CyclicGroup.html \newline
-http://www.cs.princeton.edu/~dsri/modular-inversion-answer.php \newline
-https://eprint.iacr.org/2012/195.pdf \newline
+mathworld.wolfram.com/CyclicGroup.html \newline
+eprint.iacr.org/2012/195
+www.cs.princeton.edu/\textasciitilde dsri/modular-inversion-answer.php \newline.pdf \newline
+mathworld.wolfram.com/Rabin-MillerStrongPseudoprimeTest.html \newline
 
 \subsection{RSA References}
-http://doctrina.org/Why-RSA-Works-Three-Fundamental-Questions-Answered.html \newline
+doctrina.org/How-RSA-Works-With-Examples.html \newline
+doctrina.org/Why-RSA-Works-Three-Fundamental-Questions-Answered.html \newline
 
 
 \subsection{ElGamal References}
-https://asecuritysite.com/encryption/elgamal \newline
-http://homepages.math.uic.edu/~leon/mcs425-s08/handouts/el-gamal.pdf \newline
-http://www.nku.edu/~christensen/1002mat584ElGamal%20example%20appendix.pdf \newline
+asecuritysite.com/encryption/elgamal \newline
+homepages.math.uic.edu/\textasciitilde leon/mcs425-s08/handouts/el-gamal.pdf \newline
+nku.edu/~christensen/1002mat584ElGamal\%20example\%20appendix.pdf \newline
+math.la.asu.edu/~nc/elgamal.pdf \newline
+cmsc414.wordpress.com/2009/09/23/el-gamal-examples/ \newline
 
+
+\color{red}
 \subsection{Elliptic Curve References}
-
-% %#\bibitem{IEEEhowto:kopka}
-% %H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
-  % %0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
-
-% %\end{thebibliography}
-
 
 \end{document}
 
