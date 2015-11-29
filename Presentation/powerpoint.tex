@@ -364,9 +364,6 @@
 	\begin{center}
 		$4a^3 + 27b^2 \neq 0$
 	\end{center}
-}
-
-\frame{\frametitle{What Fields Can Be Used?}
 	The field $K$ can be defined as
 	\begin{center}
 		$\mathbb{R}, \mathbb{Q}, \mathbb{C}, \mathbb{Z}/p\mathbb{Z}$
@@ -381,7 +378,59 @@
 
 \frame{\frametitle{Why Are They Used?}
 	Encryption keys are shorter and use fewer memory and CPU resources \newline
+	Operations on points are quickly calculated and are one-way \newline
+}
 
+\frame{\frametitle{Group Operations: Addition}
+	Given two points in the set
+	\begin{center}
+		$E = \{(x, y) | y^2 = x^3 + ax + b\} \cup \mathcal{O}$
+	\end{center}
+	how can we calculate $P + Q$?
+
+	\begin{figure}
+		\begin{flushright}
+			\includegraphics[scale=0.4]{add}
+		\end{flushright}
+	\end{figure}
+}
+
+\frame{\frametitle{Group Operations: Addition}
+	Compute the slope
+	\begin{center}
+		$s = \dfrac{y_P - y_Q}{x_P - x_Q}$
+	\end{center}
+	Now compute $(x, y)$ for point $R$
+	\begin{center}
+		$x_R = s^2 - (x_P + x_Q)$
+	\end{center}
+	\begin{center}
+		$y_R = s(x_P - x_R) - y_P$
+	\end{center}
+}
+
+\frame{\frametitle{Group Operations: Point Doubling}
+	How can we calculate $P + P = R = 2P$?
+
+	\begin{figure}
+		\begin{flushright}
+			\includegraphics[scale=0.4]{double}
+		\end{flushright}
+	\end{figure}
+}
+
+\frame{\frametitle{Group Operations: Point Doubling}
+	Compute the slope
+	\begin{center}
+		$s = \dfrac{3x_P^2 + a}{2y_p}$
+	\end{center}
+	Now compute $(x, y)$ for point $R = 2P$
+	\begin{center}
+		$x_R = s^2 - 2x_P$
+	\end{center}
+	\begin{center}
+		$y_R = s(x_P - x_R) - y_P$
+	\end{center}
 }
 
 \end{document}
