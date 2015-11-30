@@ -482,7 +482,7 @@
 	\end{center}
 	The cofactor is defined as
 	\begin{center}
-		$h = \dfrac{|E(\mathbb{Z}/p\mathbb{Z})|}{n}$
+		$h = \dfrac{\|E(\mathbb{Z}/p\mathbb{Z})\|}{n}$
 	\end{center}
 	and ideally $h = 1$ \newline
 	Cofactors over 4 are more susceptible to attacks
@@ -495,6 +495,30 @@
 	$G$: generator \newline
 	$n$: ord(G) \newline
 	$h$: cofactor
+}
+
+\frame{\frametitle{Diffie-Hellman Example}
+	\begin{center}
+		\begin{tabular}{ | l | c | r | }
+			\hline
+			Bob & Eve & Alice \\ \hline
+			$\beta$ & $y^2 = x^3 + ax + b$ & $\alpha$ \\ \hline
+			$B = \beta G$ & $\{p, G, n, h\}$ & $A = \alpha G$ \\ \hline
+			$A = (x_A, y_A)$ & $\{A, B\}$ & $B = (x_B, y_B)$ \\ \hline
+			$P = \beta \alpha G$ & $P = ?$ & $P = \alpha \beta G$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+}
+
+\frame{\frametitle{Controversy with Dual\_EC\_DRBG}
+	NYT reported in 2013 that there was a backdoor present \newline
+	Algorithm was designed by US NSA \newline
+	Documents ``appeared to confirm'' the backdoor \newline
+	Likely deliberately inserted as part of BULLRUN \newline
+	Reuters reported NSA paid RSA Sec \$10 million \newline
+	to use Dual\_EC\_DRBG as default in RSA BSAFE \newline
+	In 2014 NIST recommended against using this algorithm \newline
 }
 
 \end{document}
