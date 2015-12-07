@@ -21,7 +21,7 @@
 %% Legal Notice:
 %% This code is offered as-is without any warranty either expressed or
 %% implied; without even the implied warranty of MERCHANTABILITY or
-%% FITNESS FOR A PARTICULAR PURPOSE! 
+%% FITNESS FOR A PARTICULAR PURPOSE!
 %% User assumes all risk.
 %% In no event shall IEEE or any contributor to this code be liable for
 %% any damages or losses, including, but not limited to, incidental,
@@ -51,10 +51,12 @@
 
 \usepackage{xcolor}
 \usepackage{float}
+\usepackage{amsmath}
+\usepackage{amssymb}
 
 
 \begin{document}
-	
+
 \title{Understanding Asymmetric Encryption Algorithms}
 
 
@@ -75,7 +77,7 @@ Email: jason.j.pearson@wmich.edu}}
 \maketitle
 
 \begin{abstract}
-	This paper contains information on how various cryptology algorithms work including RSA public key encryption, ElGamal asymmetric cryptology and Elliptic Curve public key encryption. 
+	This paper contains information on how various cryptology algorithms work including RSA public key encryption, ElGamal asymmetric cryptology and Elliptic Curve public key encryption.
 \end{abstract}
 
 \IEEEpeerreviewmaketitle
@@ -88,12 +90,12 @@ Email: jason.j.pearson@wmich.edu}}
 
 
 \subsubsection{Asymmetric Encryption}
-Asymmetric encryption is also known as public key cryptography. These public key systems work by having a public key and a private key. The duty of the public key is to encrypt a message. The encrypted message is only able to be decrypted by an appropriate private key. One major down side of public key systems is that creating the key tends to be computationally expensive. 
+Asymmetric encryption is also known as public key cryptography. These public key systems work by having a public key and a private key. The duty of the public key is to encrypt a message. The encrypted message is only able to be decrypted by an appropriate private key. One major down side of public key systems is that creating the key tends to be computationally expensive.
 \subsubsection{Symmetric Encryption}
 Symmetric encryption uses a single key for encryption and decryption. The keys on both sides are not always identical but both can encrypt and decrypt a message. Typically a symmetric encryption uses one of two methods stream ciphers or block ciphers. Stream ciphers encrypt data as it comes typically a few bytes at a time. For block ciphers a number of bits is taken at a time and is encrypted. If the data is too small to fit into a block it is padded so that it can fit into a block. Some common algorithms that use symmetric encryption are AES and blowfish.
 
 \subsubsection{Hybrid Cryptosystems}
-Hybrid cryptosystems use both asymmetric and symmetric encryption schemes. A hybrid system works by encrypting the message with a symmetric encryption key. This key is then encrypted using an asymmetric encryption technique. The symmetric key is then appended to the message. The benefit of using two encryption methods is that less time is needed for encrypting and decrypting the message due to using a symmetric technique plus since the symmetric key is encrypted using an asymmetric method we can still get the security of a public private key pair. A new symmetric key is generated each time to improve security further. 
+Hybrid cryptosystems use both asymmetric and symmetric encryption schemes. A hybrid system works by encrypting the message with a symmetric encryption key. This key is then encrypted using an asymmetric encryption technique. The symmetric key is then appended to the message. The benefit of using two encryption methods is that less time is needed for encrypting and decrypting the message due to using a symmetric technique plus since the symmetric key is encrypted using an asymmetric method we can still get the security of a public private key pair. A new symmetric key is generated each time to improve security further.
 
 
 \subsection{Dependent Algorithms}
@@ -104,9 +106,9 @@ The AKS primality test is a deterministic algorithm for determining if a number 
 \subsubsection{Rabin-Miller Primality Test}
 The Miller-Rabin primality test provides a probabilistic efficient algorithm for determining if a number is prime. The algorithm takes in a random odd number and determines if the number is prime by testing to see if the inputted number has any factors. This algorithm is very quick and runs in no more time than (1 + o(1)) lg(n) where lg is logarithm base 2. This method is probabilistic so it can't be guaranteed that the number is prime but more likely than not it is prime.
 
+\subsubsection{Diffie--Hellman–-Merkle key exchange}
+Diffie--Hellman--Merkle (or sometimes just Diffe--Hellman) is a key exchanging protocol that ensures a party's private key security is maintained. This is done by essentially ``mixing'' a private key with a publicly agreed-upon key. These mixed keys are then exchanged and both parties' private keys are now hidden within the mix. To obtain the same shared key, the mixed keys are then mixed again with their own private keys. Since multiplication is communitive, the order here doesn't matter and the result is that both parties have a shared key that is the same and the only public information that was conveyed were private keys hidden in a mix.
 \color{red}
-\subsubsection{Diffie–Hellman–Merkle key exchange}
-something here would be good
 \subsubsection{Padding Schemes}
 something about padding schemes would be good too
 \color{black}
@@ -125,16 +127,16 @@ This algorithm is an extension to the Euclidean Algorithm. The Extended Euclidea
 \section{RSA Asymmetric Cryptography}
 
 
-The RSA asymmetric cryptography algorithm is named after its creators Ron Rivest, Adi Shamir and Leonard Adleman and was first thought of in 1973. 
+The RSA asymmetric cryptography algorithm is named after its creators Ron Rivest, Adi Shamir and Leonard Adleman and was first thought of in 1973.
 At the time it was highly classified and was not declassified until 1997.
-The idea behind this algorithm is to use large prime numbers to create a public key and a private key. 
+The idea behind this algorithm is to use large prime numbers to create a public key and a private key.
 Security for this algorithm rises from the difficulty of factoring large integers.
- 
+
 \subsection{Private and Public Key Generation}
-The key generation process is a five step process. 
+The key generation process is a five step process.
 
 \subsubsection{Creating Large Prime Numbers}
-First two large prime numbers are calculated using a prime number testing algorithm such as AKS. These will be denoted p and q. We want both of these values to be relatively the same length digit wise but it can differ a bit. 
+First two large prime numbers are calculated using a prime number testing algorithm such as AKS. These will be denoted p and q. We want both of these values to be relatively the same length digit wise but it can differ a bit.
 
 \subsubsection{Compute n}
 Computing n is just the product of p and q. The value of n will be used as the modulus for our keys and it's length is known as the key length.
@@ -155,7 +157,7 @@ Luckily we are able to use algebra to make computing this value much easier.
 \end{figure}
 
 \subsubsection{Create Public Key}
-Now we need to create a value for e which will be our public key exponent for encrypting a message. For this value we want to use a reasonably small value without it being too small. 
+Now we need to create a value for e which will be our public key exponent for encrypting a message. For this value we want to use a reasonably small value without it being too small.
 \begin{figure}[h]
 	\begin{center}
 		$1 < e < \phi \left(n\right)$
@@ -185,21 +187,21 @@ With the values of e and d determined the next step is to use this key pair to e
 
 \subsection{Example of Usage}
 \subsubsection{Creating Large Prime Numbers}
-To start with an example we will need to prime numbers for p and q. This example will be a simple one so smaller prime numbers are used. Let p = 991 and q = 821. 
+To start with an example we will need to prime numbers for p and q. This example will be a simple one so smaller prime numbers are used. Let p = 991 and q = 821.
 \subsubsection{Compute N}
 We then use p and q to determine our value for n. Since $n = p * q$ this makes the value of n = 813611.
-\subsubsection{Compute Euler's Totient} 
+\subsubsection{Compute Euler's Totient}
 Compute the Euler's totient value next.
 \begin{figure}[h]
 	\begin{center}
 $\phi \left(813611\right)=\phi \left(991\right)\phi \left(821\right)=\left(990\right)\left(820\right)=813611-\left(1811\right) = 811800$
 \end{center}
-\end{figure} 
+\end{figure}
 \subsubsection{Create Public Key}
 With these values created a public and private key can be created. Let e = 7423 which was arbitrarily chosen and now d is computed.
-\subsubsection{Create Private Key} 
+\subsubsection{Create Private Key}
 Using the extended Euclidean algorithm to compute the modular multiplicative inverse we get d = 788287. The values of d and e are our private and public keys respectively and can now be used for message encryption/decryption. \newline \indent
-Let our plain text message m = "Hi". First we use an ASCII table to determine the value of m as a large integer. A simple way to do this is to concatenate each ASCII value together to form the integer. So m = 72105. Now that we have all the values we need we can encrypt and decrypt a message
+Let our plain text message m = ``Hi''. First we use an ASCII table to determine the value of m as a large integer. A simple way to do this is to concatenate each ASCII value together to form the integer. So m = 72105. Now that we have all the values we need we can encrypt and decrypt a message
 \begin{figure}[h]
 	\begin{center}
 		$c \equiv {72105}^{7423} mod (813611)$ \newline
@@ -209,11 +211,11 @@ Let our plain text message m = "Hi". First we use an ASCII table to determine th
 	\end{center}
 \end{figure}
 
-The ASCII values for our message 'Hi' were 72 and 105 so that means it was successfully decrypted. 
+The ASCII values for our message ``Hi'' were 72 and 105 so that means it was successfully decrypted.
 
 \subsection{Discussion}
 The RSA method only works because of the presumed difficulty of factoring large numbers. When quantum computers begin to become legitimate Shor's algorithm will be able to factor large numbers in polynomial time. This advancement will break the RSA method of cryptology. \newline
-\indent Ignoring the realm of quantum computers several attempts have been made to break RSA. A specialized machine for finding prime factorization of large numbers was designed and able to break a RSA key. With enough hardware simpler keys can be cracked but to combat this larger RSA keys can be used. 
+\indent Ignoring the realm of quantum computers several attempts have been made to break RSA. A specialized machine for finding prime factorization of large numbers was designed and able to break a RSA key. With enough hardware simpler keys can be cracked but to combat this larger RSA keys can be used.
 \newline \indent
 Another potential issue is that the random number generator may not always be 100 percent random. If someone was able to guess the correct seed then the work for prime factorization would be much easier.
 
@@ -229,13 +231,13 @@ The first step is to create a large prime number p. This p will be the exclusive
 \begin{figure}[h]
 	\begin{center}
 		$y={g}^{x}\mathrm{mod}p$
-	\end{center}	
+	\end{center}
 \end{figure}
 
 
 \subsection{Encrypting and Decrypting a Message}
 
-When using ElGamal for encryption the cipher text will be twice the length of the plain text message. 
+When using ElGamal for encryption the cipher text will be twice the length of the plain text message.
 To encrypt first a random value k is chosen where k is between 1 and q - 1. Each time a message is sent the value of k should be changed. The message is then broken up into chunks and a padding scheme is followed so that the string is less than our value of p. Now for each chunk of the message m to be encrypted we create an ordered pair (a,b) by using the following equations.
 
 \begin{figure}[h]
@@ -265,7 +267,7 @@ For this example we are going to have p = 17. Our generator g = 6. Using these v
 	\end{center}
 \end{figure}
 
-Now we can decrypt a and b using the private key x. 
+Now we can decrypt a and b using the private key x.
 
 \begin{figure}[H]
 	\begin{center}
@@ -279,42 +281,110 @@ The original message was 13 and after encrypting and decrypting 13 has been retu
 \subsection{Discussion}
 One big concern with ElGamal is that a message m is going to be twice the size when encrypted. It is also slower than a symmetric algorithm for the same level of encryption so these features of algorithms makes ElGamal perfect for hybrid systems. \newline \indent
 One advantage that ElGamal has is that it works with any cyclic group such that the computational Diffie-Hellman assumption holds for the group. This assumption makes it so the encrypting function is one way. If the decisional Diffie-Hellman assumption the ElGamal will achieve semantic security. If these assumptions hold then that cyclic group can be used with ElGamal encryption. So in the future if the discrete logarithm problem is made trivial a new cyclic group could be developed.
-\color{red}
+
+%% -------------------------------- Break point for next algorithm --------------------------------
+
 \section{Elliptic Curve Asymmetric Cryptography}
+Elliptic Curve Cryptopgraphy is based on the mathematics of elliptic curves. These are curves of the form
+
+\begin{figure}[h]
+	\begin{center}
+		$E = \{(x, y) | y^2 = x^3 + ax + b\}$
+	\end{center}
+\end{figure}
+
+The curve must also satisfy some other requirements: that $a, b \in K$. $K$ is a field which can be defined as $\mathbb{R}, \mathbb{Q}, \mathbb{C}, \mathbb{Z}/p\mathbb{Z}$ but for cryptographic key-exchange usually $\mathbb{Z}/p\mathbb{Z}$ is used. These points are coupled with a point at infinity ($\mathcal{O}$) and satisfy the inequality
+
+\begin{figure}[h]
+	\begin{center}
+		$4a^3 + 27b^2 \neq 0$
+	\end{center}
+\end{figure}
+
+Because of the usual basis on finite fields such as $\mathbb{Z}/p\mathbb{Z}$, there is also a requirement that the \textit{field characteristic} not be 2 nor 3.
+
+\subsection{Group Operations: Addition}
+Elliptic curves are used in a unique way in regards to addition. To add two points on the curve, $P + Q$, the points are plotted and a line intersecting those points is drawn. This line will intersect a third point $-R$ and then that result point is reflected across the x-axis to obtain the result point $R$. Algebraically it is defined
+
+\begin{figure}[h]
+	\begin{center}
+		$P + Q = R$ \newline
+		$s = \dfrac{y_P - y_Q}{x_P - x_Q}$ \newline
+		$x_R = s^2 - (x_P + x_Q)$ \newline
+		$y_R = s(x_P - x_R) - y_P$ \newline
+	\end{center}
+\end{figure}
+
+The slope is first calculated for the line that lies across $P, Q$ and using that slope, the point $R$`s ($x, y$) coordinates are obtained. This is how addition is defined when using an elliptic curve.
+
+\subsection{Group Operation: Point Doubling}
+It is also viable to simple double the same point using this idea. The point is first plotted and then a tanget line drawn intersecting that point which will intersect the curve at a second point. This second point is $-R$ and is again reflected across the x-axis to obtain the result point $R$. Algebraically it is defined
+
+\begin{figure}[h]
+	\begin{center}
+		$2P = R$ \newline
+		$s = \dfrac{3x_P^2 + a}{2y_p}$ \newline
+		$x_R = s^2 - 2x_P$ \newline
+		$y_R = s(x_P - x_R) - y_P$ \newline
+	\end{center}
+\end{figure}
+
+Very similar as before, but for the slope the curve's $a$ variable must be used in the calculation.
+
+\subsection{Special Considerations}
+For points that are directly vertical from each other, or a single point that has $y = 0$, the result is the point at infinity. Obviously such lines have no slope and thus do not intersect the elliptic curve at all.
+
+\subsection{Group Operation: Scalar Multiplication}
+There is also a unique way to obtain multiples of some point $Q$ where $Q = kP$. This is done by repeated addition up to the multiple $k$
+
+\begin{figure}[h]
+	\begin{center}
+		$Q = P + P + \textellipsis + P$ \textit{k times}
+	\end{center}
+\end{figure}
+
+Scalar multiplication is the basis for Elliptic Curve Diffie-Hellman key exchange. This gives way to what is known as the ``Elliptic Curve Logarithm Problem'' which basically states that given point $Q$ finding the point $kP$ is infeasible. The curve is paired with a generator point $G$ and that point has an ordinal for its cyclic group, which would be the number of scalar multiplications until the result is the point at infinity.
 
 \subsection{Private and Public Key Generation}
-
-\subsection{Encrypting and Decrypting a Message}
-
-\subsection{Example of Usage}
+First, a client communicates with a server and they both agree on a type of key exchange to use. If the server has selected EECDH (usually Ephemeral Elliptic Curve Diffie-Hellman), a curve is selected and then both parties must select a private key. This key must be between $1$ and $n$ where $n = ord(G)$, the ordinal of the generator point's cyclic group. The client and server calculate the scalar multiple of the generator point and then exchange this. After the exchange, they again multiply the received key by their own private keys and this completes the exchange. Both parties now have a ``mixed key'' that are equivalent to each other and a third party would be stuck trying to calculate the private key of either the client or server from the scalar multiple point, which is infeasible.
 
 \subsection{Discussion}
+Elliptic Curve Cryptography has clear benefits over other algorithms that use large prime numbers. The key sizes are much smaller for comparable security and the group operations are not easily reversible. A potential hacker would have to iteratively check every scalar multiple of some point to get the private key another party had selected and the massive curves created by the mathematics community in use in these functions are much too large to be able to check each one. By the time it was obtained the communication would likely be finished.
+
+It should be noted there was some controversey over an elliptic curve implementation of a random bit stream for the RSA BSAFE suite. It was alleged that the NSA paid \$10 million to RSA for them to select a particular random bit generator for this suite, which was created by the NSA itself. The New York Times had reported that they had obtained documents that ``appeared to confirm'' the existance of a backdoor in this algorithm, potientially allowing NSA's BULLRUN decryption group to easily reverse some particular communication that used this algorthim. NIST has since recommended anyone selecting this algorithm use a different bit generator.
 
 
-\color{black}
 \section{References}
 \subsection{General References}
-mathworld.wolfram.com/CyclicGroup.html \newline
-eprint.iacr.org/2012/195
-www.cs.princeton.edu/\textasciitilde dsri/modular-inversion-answer.php \newline.pdf \newline
-mathworld.wolfram.com/Rabin-MillerStrongPseudoprimeTest.html \newline
+\begin{itemize}
+\item mathworld.wolfram.com/CyclicGroup.html \newline
+\item eprint.iacr.org/2012/195.pdf \newline
+\item www.cs.princeton.edu/\textasciitilde dsri/modular-inversion-answer.php \newline
+\item mathworld.wolfram.com/Rabin-MillerStrongPseudoprimeTest.html \newline
+\end{itemize}
 
 \subsection{RSA References}
-doctrina.org/How-RSA-Works-With-Examples.html \newline
-doctrina.org/Why-RSA-Works-Three-Fundamental-Questions-Answered.html \newline
+\begin{itemize}
+\item doctrina.org/How-RSA-Works-With-Examples.html \newline
+\item doctrina.org/Why-RSA-Works-Three-Fundamental-Questions-Answered.html \newline
+\end{itemize}
 
 
 \subsection{ElGamal References}
-asecuritysite.com/encryption/elgamal \newline
-homepages.math.uic.edu/\textasciitilde leon/mcs425-s08/handouts/el-gamal.pdf \newline
-nku.edu/~christensen/1002mat584ElGamal\%20example\%20appendix.pdf \newline
-math.la.asu.edu/~nc/elgamal.pdf \newline
-cmsc414.wordpress.com/2009/09/23/el-gamal-examples/ \newline
+\begin{itemize}
+\item asecuritysite.com/encryption/elgamal \newline
+\item homepages.math.uic.edu/\textasciitilde leon/mcs425-s08/handouts/el-gamal.pdf \newline
+\item nku.edu/\textasciitilde christensen/1002mat584ElGamal\%20example\%20appendix.pdf \newline
+\item math.la.asu.edu/\textasciitilde nc/elgamal.pdf \newline
+\item cmsc414.wordpress.com/2009/09/23/el-gamal-examples/ \newline
+\end{itemize}
 
 
-\color{red}
 \subsection{Elliptic Curve References}
+\begin{itemize}
+\item imperialviolet.org/2010/12/04/ecc.html \newline
+\item arstechnica.com/security/2013/10/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/ \newline
+\item youtube.com/watch?v=F3zzNa42-tQ (Robert Pierce) \newline
+\end{itemize}
 
 \end{document}
-
-
